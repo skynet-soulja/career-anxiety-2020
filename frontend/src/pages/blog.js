@@ -5,20 +5,15 @@ import Layout from "../components/layout";
 import ArticlesCollection from "../components/collections/articles";
 import FilterButton from "../components/filter";
 
-const Category = ({ data }) => {
-  const category = data.category.name;
-  const seo = {
-    metaTitle: category,
-    metaDescription: `All ${category} articles`,
-    color: data.strapiBlogpage.seo.color,
-  };
-
+const BlogPage = ({ data }) => {
   return (
-    <Layout seo={seo}>
+    <Layout seo={data.strapiBlogpage.seo}>
       <header className="ca-header">
         <div className="ca-header-content -sm">
           <div className="ca-header-container e-con">
-            <h1 className="ca-header-title">{category} Posts</h1>
+            <h1 className="ca-header-title">
+              {data.strapiBlogpage.hero.title}
+            </h1>
           </div>
         </div>
       </header>
@@ -26,10 +21,10 @@ const Category = ({ data }) => {
       <FilterButton />
 
       <section className="ca-section">
-        <div className="ca-section-content e-noc e-hom">
+        <div className="ca-section-content e-hom e-noc">
           <div className="ca-section-container e-con">
             <ArticlesCollection
-              huge={category}
+              huge="All"
               articles={data.allStrapiArticle.nodes}
             />
           </div>
@@ -39,13 +34,28 @@ const Category = ({ data }) => {
   );
 };
 
-export default Category;
+export default BlogPage;
 
 export const query = graphql`
-  query Category($slug: String!) {
+  {
+    strapiBlogpage {
+      hero {
+        title
+      }
+      seo {
+        metaTitle
+        metaDescription
+        shareImage {
+          publicURL
+        }
+        color {
+          accent
+        }
+      }
+    }
     allStrapiArticle(
       sort: { fields: publishedAt, order: DESC }
-      filter: { status: { eq: "published" }, category: { slug: { eq: $slug } } }
+      filter: { status: { eq: "published" } }
     ) {
       nodes {
         id
@@ -61,20 +71,10 @@ export const query = graphql`
         }
         image {
           childImageSharp {
-            fluid(maxWidth: 1200, maxHeight: 1600) {
+            fluid(maxWidth: 564, maxHeight: 850) {
               ...GatsbyImageSharpFluid
             }
           }
-        }
-      }
-    }
-    category: strapiCategory(slug: { eq: $slug }) {
-      name
-    }
-    strapiBlogpage {
-      seo {
-        color {
-          accent
         }
       }
     }

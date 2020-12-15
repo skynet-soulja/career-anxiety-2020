@@ -4,11 +4,53 @@ import { Helmet } from "react-helmet";
 import { useStaticQuery, graphql } from "gatsby";
 
 const SEO = ({ seo = {} }) => {
-  const { strapiGlobal } = useStaticQuery(query);
-  const { defaultSeo, siteName, favicon } = strapiGlobal;
+  const data = useStaticQuery(query);
+  const {
+    defaultSeo,
+    siteName,
+    favicon,
+    fontColor,
+    backgroundColor,
+  } = data.strapiGlobal;
 
   // Merge default and page-specific SEO values
   const fullSeo = { ...defaultSeo, ...seo };
+
+  // Set global background color css variable
+  document.documentElement.style.setProperty("--color-fnt", fontColor);
+  document.documentElement.style.setProperty("--color-bg", backgroundColor);
+  document.documentElement.style.setProperty(
+    "--color-acc",
+    fullSeo.color.accent
+  );
+  document.documentElement.style.setProperty(
+    "--color-about",
+    data.strapiAboutpage.seo.color.accent
+  );
+  document.documentElement.style.setProperty(
+    "--color-blog",
+    data.strapiBlogpage.seo.color.accent
+  );
+  document.documentElement.style.setProperty(
+    "--color-book",
+    data.strapiBookpage.seo.color.accent
+  );
+  document.documentElement.style.setProperty(
+    "--color-contact",
+    data.strapiContactpage.seo.color.accent
+  );
+  document.documentElement.style.setProperty(
+    "--color-home",
+    data.strapiHomepage.seo.color.accent
+  );
+  document.documentElement.style.setProperty(
+    "--color-speaking",
+    data.strapiSpeakingpage.seo.color.accent
+  );
+  document.documentElement.style.setProperty(
+    "--color-workshop",
+    data.strapiWorkshoppage.seo.color.accent
+  );
 
   const getMetaTags = () => {
     const tags = [];
@@ -73,38 +115,22 @@ const SEO = ({ seo = {} }) => {
 
   const metaTags = getMetaTags();
 
+  const capitalizedTitle = fullSeo.metaTitle
+    .split(" ")
+    .map((str) => str.replace(/^\w/, (c) => c.toUpperCase()))
+    .join(" ");
+
   return (
     <Helmet
-      title={fullSeo.metaTitle}
-      titleTemplate={`%s | ${siteName}`}
+      title={capitalizedTitle}
+      titleTemplate={`%s — ${siteName}`}
       link={[
         {
           rel: "icon",
           href: favicon.publicURL,
         },
-        {
-          rel: "stylesheet",
-          href: "https://fonts.googleapis.com/css?family=Staatliches",
-        },
-        {
-          rel: "stylesheet",
-          href:
-            "https://cdn.jsdelivr.net/npm/uikit@3.2.3/dist/css/uikit.min.css",
-        },
       ]}
-      script={[
-        {
-          src:
-            "https://cdnjs.cloudflare.com/ajax/libs/uikit/3.2.0/js/uikit.min.js",
-        },
-        {
-          src:
-            "https://cdn.jsdelivr.net/npm/uikit@3.2.3/dist/js/uikit-icons.min.js",
-        },
-        {
-          src: "https://cdnjs.cloudflare.com/ajax/libs/uikit/3.2.0/js/uikit.js",
-        },
-      ]}
+      script={[]}
       meta={metaTags}
     />
   );
@@ -138,6 +164,60 @@ const query = graphql`
         metaDescription
         shareImage {
           publicURL
+        }
+        color {
+          accent
+        }
+      }
+      fontColor
+      backgroundColor
+    }
+    strapiBlogpage {
+      seo {
+        color {
+          accent
+        }
+      }
+    }
+    strapiBookpage {
+      seo {
+        color {
+          accent
+        }
+      }
+    }
+    strapiContactpage {
+      seo {
+        color {
+          accent
+        }
+      }
+    }
+    strapiHomepage {
+      seo {
+        color {
+          accent
+        }
+      }
+    }
+    strapiSpeakingpage {
+      seo {
+        color {
+          accent
+        }
+      }
+    }
+    strapiWorkshoppage {
+      seo {
+        color {
+          accent
+        }
+      }
+    }
+    strapiAboutpage {
+      seo {
+        color {
+          accent
         }
       }
     }

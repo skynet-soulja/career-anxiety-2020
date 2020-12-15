@@ -5,11 +5,11 @@ import Layout from "../components/layout";
 import ArticlesCollection from "../components/collections/articles";
 import FilterButton from "../components/filter";
 
-const Category = ({ data }) => {
-  const category = data.category.name;
+const Author = ({ data }) => {
+  const writer = data.author.name;
   const seo = {
-    metaTitle: category,
-    metaDescription: `All ${category} articles`,
+    metaTitle: writer,
+    metaDescription: `All ${writer} articles`,
     color: data.strapiBlogpage.seo.color,
   };
 
@@ -18,7 +18,7 @@ const Category = ({ data }) => {
       <header className="ca-header">
         <div className="ca-header-content -sm">
           <div className="ca-header-container e-con">
-            <h1 className="ca-header-title">{category} Posts</h1>
+            <h1 className="ca-header-title">Posts by {writer}</h1>
           </div>
         </div>
       </header>
@@ -26,10 +26,10 @@ const Category = ({ data }) => {
       <FilterButton />
 
       <section className="ca-section">
-        <div className="ca-section-content e-noc e-hom">
+        <div className="ca-section-content e-hom e-noc">
           <div className="ca-section-container e-con">
             <ArticlesCollection
-              huge={category}
+              huge="Author"
               articles={data.allStrapiArticle.nodes}
             />
           </div>
@@ -39,13 +39,13 @@ const Category = ({ data }) => {
   );
 };
 
-export default Category;
+export default Author;
 
 export const query = graphql`
-  query Category($slug: String!) {
+  query Author($slug: String!) {
     allStrapiArticle(
       sort: { fields: publishedAt, order: DESC }
-      filter: { status: { eq: "published" }, category: { slug: { eq: $slug } } }
+      filter: { status: { eq: "published" }, author: { slug: { eq: $slug } } }
     ) {
       nodes {
         id
@@ -68,7 +68,7 @@ export const query = graphql`
         }
       }
     }
-    category: strapiCategory(slug: { eq: $slug }) {
+    author: strapiWriter(slug: { eq: $slug }) {
       name
     }
     strapiBlogpage {
