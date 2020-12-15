@@ -1,0 +1,46 @@
+{
+  "kind": "singleType",
+  "collectionName": "bookpages",
+  "info": {
+    "name": "Bookpage",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": false
+  },
+  "attributes": {
+    "seo": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.seo"
+    },
+    "hero": {
+      "type": "component",
+      "repeatable": false,
+      "component": "sections.hero",
+      "required": true
+    },
+    "bookCover": {
+      "type": "component",
+      "repeatable": false,
+      "component": "media.image"
+    },
+    "toOrderURL": {
+      "type": "string",
+      "required": true
+    },
+    "homepageBlurb": {
+      "type": "richtext",
+      "required": true
+    },
+    "fullDescription": {
+      "type": "richtext",
+      "required": true
+    },
+    "reviews": {
+      "collection": "review"
+    }
+  }
+}
