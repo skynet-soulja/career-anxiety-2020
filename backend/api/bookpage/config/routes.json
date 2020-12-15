@@ -1,0 +1,28 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/bookpage",
+      "handler": "bookpage.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/bookpage",
+      "handler": "bookpage.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/bookpage",
+      "handler": "bookpage.delete",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}

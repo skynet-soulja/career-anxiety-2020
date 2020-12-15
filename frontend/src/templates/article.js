@@ -2,8 +2,149 @@ import React from "react";
 import { graphql } from "gatsby";
 import Img from "gatsby-image";
 import Moment from "react-moment";
-import Layout from "../components/layout";
 import Markdown from "react-markdown";
+
+import Layout from "../components/layout";
+import UnderlineLink from "../components/link/underline";
+import CommentsCollection from "../components/collections/comments";
+import CommentForm from "../components/form/comment";
+
+import time from "../components/time";
+
+const Article = ({ data }) => {
+  const article = data.strapiArticle;
+  const [comments, setComments] = React.useState([]);
+
+  const fetchComments = () => {
+    fetch(
+      `${process.env.GATSBY_API_URL}/comments?article=${article.strapiId}`,
+      {
+        method: "GET",
+        headers: { "Content-Type": "application/json" },
+      }
+    )
+      .then((response) => response.json())
+      .then((result) => {
+        setComments(time.sortMostRecent(result));
+      })
+      .catch((error) => {});
+  };
+
+  React.useEffect(() => {
+    fetchComments();
+  }, []);
+
+  const seo = {
+    metaTitle: article.title,
+    metaDescription: article.description,
+    shareImage: article.image,
+    article: true,
+    color: data.strapiBlogpage.seo.color,
+  };
+
+  const articleWithEdges = data.allStrapiArticle.edges.filter(
+    ({ node }) => node.strapiId === article.strapiId
+  );
+
+  const unwrappedArticle = articleWithEdges.length
+    ? articleWithEdges[0]
+    : { previous: null, next: null };
+
+  return (
+    <Layout seo={seo}>
+      <header className="ca-header">
+        <div className="ca-post-header-content">
+          <div className="ca-post-header-container e-con">
+            <h1 className="ca-post-title">{article.title}</h1>
+
+            <p className="ca-post-description">{article.description}</p>
+          </div>
+        </div>
+      </header>
+
+      <section className="ca-post">
+        <div className="ca-post-content">
+          <div className="ca-post-container e-con">
+            <div className="ca-post-image">
+              <Img
+                alt={article.title}
+                fluid={article.image.childImageSharp.fluid}
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="ca-section">
+        <div className="ca-content">
+          <div className="ca-container e-con">
+            <div className="ca-post-info">
+              <div className="ca-article-info">
+                <Moment format="MMM DD, YYYY">{article.publishedAt}</Moment> |{" "}
+                <UnderlineLink to={`/blog/author/${article.author.slug}`}>
+                  {article.author.name}
+                </UnderlineLink>{" "}
+                |{" "}
+                <UnderlineLink to={`/blog/category/${article.category.name}`}>
+                  {article.category.name}
+                </UnderlineLink>
+              </div>
+            </div>
+
+            <div className="ca-post-main">
+              <div className="ca-markdown-wrap">
+                <Markdown source={article.content} escapeHtml={false} />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="ca-comments">
+        <div className="ca-comments-content">
+          <div className="ca-comments-container e-con">
+            <h1 className="ca-comments-title">Comments</h1>
+
+            <CommentsCollection comments={comments} />
+
+            <div className="ca-form-wrap">
+              <CommentForm
+                articleId={article.strapiId}
+                fetchComments={fetchComments}
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="ca-edges">
+        <div className="ca-edges-content">
+          <div className="ca-edges-container e-con">
+            <div className="ca-edges-split-wrap">
+              {unwrappedArticle.previous && (
+                <div className="ca-edges-split">
+                  <UnderlineLink to={`/blog/${unwrappedArticle.previous.slug}`}>
+                    Prev
+                  </UnderlineLink>
+                </div>
+              )}
+
+              {unwrappedArticle.next && (
+                <div className="ca-edges-split">
+                  <UnderlineLink to={`/blog/${unwrappedArticle.next.slug}`}>
+                    Next
+                  </UnderlineLink>
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+      </section>
+    </Layout>
+  );
+};
+
+export default Article;
 
 export const query = graphql`
   query ArticleQuery($slug: String!) {
@@ -16,76 +157,46 @@ export const query = graphql`
       image {
         publicURL
         childImageSharp {
-          fixed {
-            src
+          fluid(maxWidth: 2500, maxHeight: 1400) {
+            ...GatsbyImageSharpFluid
           }
         }
       }
       author {
         name
-        picture {
+        headshot {
           childImageSharp {
             fixed(width: 30, height: 30) {
               src
             }
           }
         }
+        slug
+      }
+      category {
+        name
+        slug
+      }
+    }
+    allStrapiArticle(filter: { status: { eq: "published" } }) {
+      edges {
+        node {
+          strapiId
+        }
+        next {
+          slug
+        }
+        previous {
+          slug
+        }
+      }
+    }
+    strapiBlogpage {
+      seo {
+        color {
+          accent
+        }
       }
     }
   }
 `;
-
-const Article = ({ data }) => {
-  const article = data.strapiArticle;
-  const seo = {
-    metaTitle: article.title,
-    metaDescription: article.description,
-    shareImage: article.image,
-    article: true,
-  };
-
-  return (
-    <Layout seo={seo}>
-      <div>
-        <div
-          id="banner"
-          className="uk-height-medium uk-flex uk-flex-center uk-flex-middle uk-background-cover uk-light uk-padding uk-margin"
-          data-src={article.image.publicURL}
-          data-srcset={article.image.publicURL}
-          data-uk-img
-        >
-          <h1>{article.title}</h1>
-        </div>
-
-        <div className="uk-section">
-          <div className="uk-container uk-container-small">
-            <Markdown source={article.content} escapeHtml={false} />
-
-            <hr className="uk-divider-small" />
-
-            <div className="uk-grid-small uk-flex-left" data-uk-grid="true">
-              <div>
-                {article.author.picture && (
-                  <Img
-                    fixed={article.author.picture.childImageSharp.fixed}
-                    imgStyle={{ position: "static", borderRadius: "50%" }}
-                  />
-                )}
-              </div>
-              <div className="uk-width-expand">
-                <p className="uk-margin-remove-bottom">
-                  By {article.author.name}
-                </p>
-                <p className="uk-text-meta uk-margin-remove-top">
-                  <Moment format="MMM Do YYYY">{article.published_at}</Moment>
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </Layout>
-  );
-};
-
-export default Article;

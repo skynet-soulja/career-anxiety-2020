@@ -1,0 +1,23 @@
+{
+  "collectionName": "components_shared_social_medias",
+  "info": {
+    "name": "socialMedia",
+    "icon": "apple-alt"
+  },
+  "options": {},
+  "attributes": {
+    "platform": {
+      "type": "enumeration",
+      "enum": [
+        "Twitter",
+        "LinkedIn",
+        "Facebook"
+      ],
+      "required": true
+    },
+    "platformURL": {
+      "type": "string",
+      "required": true
+    }
+  }
+}

@@ -1,0 +1,50 @@
+{
+  "kind": "collectionType",
+  "collectionName": "workshops",
+  "info": {
+    "name": "workshop",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": false
+  },
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "type": "text",
+      "required": true,
+      "maxLength": 600
+    },
+    "objectives": {
+      "type": "text",
+      "maxLength": 600,
+      "required": true
+    },
+    "audience": {
+      "type": "text",
+      "required": true,
+      "maxLength": 600
+    },
+    "date": {
+      "type": "date",
+      "required": true
+    },
+    "start": {
+      "type": "time",
+      "required": true
+    },
+    "end": {
+      "type": "time",
+      "required": true
+    },
+    "toRegisterURL": {
+      "type": "string",
+      "required": true
+    }
+  }
+}

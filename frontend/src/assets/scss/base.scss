@@ -1,0 +1,179 @@
+// Document
+html {
+  height: 100%;
+}
+
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+
+  background: $color-bg;
+  color: $color-text;
+
+  font-family: $font-family;
+  font-size: $font-size;
+  letter-spacing: $letter-spacing;
+  line-height: $line-height;
+  text-align: left;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  overflow: hidden !important;
+}
+
+* {
+  box-sizing: border-box;
+
+  &:before,
+  &:after {
+    box-sizing: border-box;
+  }
+
+  &:focus {
+    outline: none !important;
+  }
+
+  &::selection {
+    color: $color-base;
+    background: $color-graybase;
+  }
+}
+
+// Links
+a {
+  color: $color-link;
+  cursor: pointer;
+  text-decoration: none;
+
+  &:hover,
+  &:focus {
+    color: $color-link-hover;
+    text-decoration: none;
+  }
+}
+
+a,
+button,
+label,
+input {
+  -webkit-tap-highlight-color: transparent;
+}
+
+// Media
+img,
+svg,
+canvas,
+audio,
+video,
+iframe {
+  vertical-align: middle;
+}
+
+figure {
+  margin: 0;
+}
+
+// Buttons
+button,
+[type="button"],
+[type="reset"],
+[type="submit"] {
+  &:not(:disabled) {
+    cursor: pointer;
+  }
+}
+
+button {
+  outline: none;
+  border: none;
+  background-color: unset;
+}
+
+// Text
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+blockquote {
+  margin: 0;
+  padding: 0;
+}
+
+em {
+  font-style: normal;
+}
+
+h1 {
+  letter-spacing: -0.03em;
+}
+
+// View
+#___gatsby {
+  height: 100%;
+}
+
+#gatsby-focus-wrapper {
+  height: 100%;
+}
+
+#view-main {
+  height: 100%;
+  opacity: 0;
+}
+
+// Scroll
+#view-main .scrollbar-track {
+  background: 0 0;
+  right: 4px;
+}
+
+#view-main .scrollbar-thumb-y {
+  border-radius: 0;
+  background-color: var(--color-acc);
+  width: 8px;
+}
+
+// E
+.e-rel {
+  position: relative;
+}
+
+.e-dib {
+  display: inline-block;
+}
+
+.e-db {
+  display: block;
+}
+
+.e-h {
+  height: 100%;
+}
+
+.e-con {
+  padding: 0 140px;
+}
+
+.e-noc {
+  padding: 140px 0;
+}
+
+.e-bot {
+  padding-bottom: 140px;
+}
+
+.e-top {
+  padding-top: 140px;
+}
+
+.e-hom {
+  padding-bottom: 360px;
+}
+
+.e-cen {
+  text-align: center;
+}

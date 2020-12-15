@@ -1,0 +1,22 @@
+{
+  "kind": "collectionType",
+  "collectionName": "requests-newsletter",
+  "info": {
+    "name": "Requests - Newsletter",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": false
+  },
+  "attributes": {
+    "email": {
+      "type": "email",
+      "required": true,
+      "unique": true,
+      "maxLength": 80,
+      "private": true
+    }
+  }
+}

@@ -1,5 +1,4 @@
 exports.createPages = async ({ graphql, actions }) => {
-  const { createPage } = actions;
   const result = await graphql(
     `
       {
@@ -19,6 +18,14 @@ exports.createPages = async ({ graphql, actions }) => {
             }
           }
         }
+        authors: allStrapiWriter {
+          edges {
+            node {
+              strapiId
+              slug
+            }
+          }
+        }
       }
     `
   );
@@ -30,12 +37,13 @@ exports.createPages = async ({ graphql, actions }) => {
   // Create blog articles pages.
   const articles = result.data.articles.edges;
   const categories = result.data.categories.edges;
+  const authors = result.data.authors.edges;
 
   const ArticleTemplate = require.resolve("./src/templates/article.js");
 
   articles.forEach((article, index) => {
-    createPage({
-      path: `/article/${article.node.slug}`,
+    actions.createPage({
+      path: `/blog/${article.node.slug}`,
       component: ArticleTemplate,
       context: {
         slug: article.node.slug,
@@ -46,11 +54,23 @@ exports.createPages = async ({ graphql, actions }) => {
   const CategoryTemplate = require.resolve("./src/templates/category.js");
 
   categories.forEach((category, index) => {
-    createPage({
-      path: `/category/${category.node.slug}`,
+    actions.createPage({
+      path: `/blog/category/${category.node.slug}`,
       component: CategoryTemplate,
       context: {
         slug: category.node.slug,
+      },
+    });
+  });
+
+  const AuthorTemplate = require.resolve("./src/templates/author.js");
+
+  authors.forEach((author, index) => {
+    actions.createPage({
+      path: `/blog/author/${author.node.slug}`,
+      component: AuthorTemplate,
+      context: {
+        slug: author.node.slug,
       },
     });
   });

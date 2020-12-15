@@ -1,0 +1,28 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/speakingpage",
+      "handler": "speakingpage.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/speakingpage",
+      "handler": "speakingpage.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/speakingpage",
+      "handler": "speakingpage.delete",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}
