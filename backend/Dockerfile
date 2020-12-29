@@ -1,16 +1,14 @@
 FROM strapi/base
 
+ENV NODE_ENV production
+
 WORKDIR /app
 
-COPY ./package.json ./
-COPY ./yarn.lock ./
+COPY package.json yarn.lock ./
 
 RUN yarn install
 
 COPY . .
-
-ENV NODE_VERSION 12.18.1
-ENV NODE_ENV production
 
 RUN yarn build
 
