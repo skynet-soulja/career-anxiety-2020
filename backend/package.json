@@ -2,7 +2,7 @@
   "name": "backend",
   "private": true,
   "version": "0.1.0",
-  "description": "A Strapi application",
+  "description": "Career Anxiety 2020 Website",
   "scripts": {
     "develop-dev": "NODE_ENV=development strapi develop",
     "develop-stg": "NODE_ENV=staging strapi develop",
@@ -30,7 +30,7 @@
     "strapi-utils": "3.2.3"
   },
   "author": {
-    "name": "A Strapi developer"
+    "name": "William Martin <martinwillnorman@protonmail.com>"
   },
   "strapi": {
     "uuid": "b09666a0-7292-4d50-931a-34c4712d47be",
