@@ -5,11 +5,11 @@ module.exports = ({ env }) => ({
       connector: "bookshelf",
       settings: {
         client: "postgres",
-        host: env("DATABASE_HOST", "localhost"),
-        port: env.int("DATABASE_PORT", 5432),
-        database: env("DATABASE_NAME", "strapi-production"),
-        username: env("DATABASE_USERNAME", "strapi"),
-        password: env("DATABASE_PASSWORD", "strapi"),
+        host: env("RDS_HOSTNAME", "localhost"),
+        port: env.int("RDS_PORT", 5432),
+        database: env("RDS_DB_NAME", "strapi-production"),
+        username: env("RDS_USERNAME", "strapi"),
+        password: env("RDS_PASSWORD", "strapi"),
         schema: env("DATABASE_SCHEMA", "public"), // Not Required
         ssl: {
           rejectUnauthorized: env.bool("DATABASE_SSL_SELF", false), // For self-signed certificates
