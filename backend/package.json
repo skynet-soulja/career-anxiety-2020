@@ -16,6 +16,7 @@
     "knex": "<0.20.0",
     "mime-types": "^2.1.27",
     "pg": "^8.5.1",
+    "pg-connection-string": "^2.4.0",
     "sqlite3": "latest",
     "strapi": "3.2.3",
     "strapi-admin": "3.2.3",
