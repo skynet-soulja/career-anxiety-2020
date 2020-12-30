@@ -1,3 +1,6 @@
+const parse = require("pg-connection-string").parse;
+const config = process.env.DATABASE_URL ? parse(process.env.DATABASE_URL) : {};
+
 module.exports = ({ env }) => ({
   defaultConnection: "default",
   connections: {
@@ -5,18 +8,18 @@ module.exports = ({ env }) => ({
       connector: "bookshelf",
       settings: {
         client: "postgres",
-        host: env("DATABASE_HOST", "localhost"),
-        port: env.int("DATABASE_PORT", 5432),
-        database: env("DATABASE_NAME", "strapi-staging"),
-        username: env("DATABASE_USERNAME", "strapi"),
-        password: env("DATABASE_PASSWORD", "strapi"),
+        host: config.host || "localhost",
+        port: config.port || 5432,
+        database: config.database || "strapi-staging",
+        username: config.user || "strapi",
+        password: config.password || "strapi",
         schema: env("DATABASE_SCHEMA", "public"), // Not Required
         ssl: {
           rejectUnauthorized: env.bool("DATABASE_SSL_SELF", false), // For self-signed certificates
         },
       },
       options: {
-        ssl: env.bool("DATABASE_SSL", false),
+        ssl: true,
       },
     },
   },
