@@ -16,13 +16,10 @@ const Article = ({ data }) => {
   const [comments, setComments] = React.useState([]);
 
   const fetchComments = () => {
-    fetch(
-      `${process.env.GATSBY_API_URL}/comments?article=${article.strapiId}`,
-      {
-        method: "GET",
-        headers: { "Content-Type": "application/json" },
-      }
-    )
+    fetch(`${process.env.API_URL}/comments?article=${article.strapiId}`, {
+      method: "GET",
+      headers: { "Content-Type": "application/json" },
+    })
       .then((response) => response.json())
       .then((result) => {
         setComments(time.sortMostRecent(result));

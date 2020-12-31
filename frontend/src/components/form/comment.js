@@ -11,7 +11,7 @@ const CommentForm = ({ articleId, fetchComments }) => {
 
     const requestBody = { ...values, article: articleId };
 
-    fetch(`${process.env.GATSBY_API_URL}/comments`, {
+    fetch(`${process.env.API_URL}/comments`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(requestBody),
