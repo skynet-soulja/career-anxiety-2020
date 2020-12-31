@@ -5,16 +5,12 @@ import { useForm } from "react-hook-form";
 import ToastContext from "../../context/ToastContext";
 
 const ContactForm = () => {
-  console.log(`API_URL -> ${process.env.API_URL}`);
-  console.log(`GATSBY_API_URL -> ${process.env.GATSBY_API_URL}`);
-  console.log(`ROOT_URL -> ${process.env.ROOT_URL}`);
-  console.log(`GATSBY_ROOT_URL -> ${process.env.GATSBY_ROOT_URL}`);
   const { setMessage } = React.useContext(ToastContext);
 
   const onSubmit = (values) => {
     setMessage(`Sending...`);
 
-    fetch(`${process.env.API_URL}/requests-personals`, {
+    fetch(`${process.env.GATSBY_API_URL}/requests-personals`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(values),
