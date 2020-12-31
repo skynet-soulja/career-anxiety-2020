@@ -26,7 +26,7 @@ class ScrollTriggerPlugin extends Scrollbar.ScrollbarPlugin {
       scroller: "#view-main",
     });
 
-    ScrollTrigger.scrollerProxy(document.getElementById("view-main"), {
+    ScrollTrigger.scrollerProxy("#view-main", {
       scrollTop(value) {
         if (arguments.length) {
           scrollbar.scrollTop = value; // setter
