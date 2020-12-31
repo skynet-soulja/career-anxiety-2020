@@ -17,40 +17,42 @@ const SEO = ({ seo = {} }) => {
   const fullSeo = { ...defaultSeo, ...seo };
 
   // Set global background color css variable
-  document.documentElement.style.setProperty("--color-fnt", fontColor);
-  document.documentElement.style.setProperty("--color-bg", backgroundColor);
-  document.documentElement.style.setProperty(
-    "--color-acc",
-    fullSeo.color.accent
-  );
-  document.documentElement.style.setProperty(
-    "--color-about",
-    data.strapiAboutpage.seo.color.accent
-  );
-  document.documentElement.style.setProperty(
-    "--color-blog",
-    data.strapiBlogpage.seo.color.accent
-  );
-  document.documentElement.style.setProperty(
-    "--color-book",
-    data.strapiBookpage.seo.color.accent
-  );
-  document.documentElement.style.setProperty(
-    "--color-contact",
-    data.strapiContactpage.seo.color.accent
-  );
-  document.documentElement.style.setProperty(
-    "--color-home",
-    data.strapiHomepage.seo.color.accent
-  );
-  document.documentElement.style.setProperty(
-    "--color-speaking",
-    data.strapiSpeakingpage.seo.color.accent
-  );
-  document.documentElement.style.setProperty(
-    "--color-workshop",
-    data.strapiWorkshoppage.seo.color.accent
-  );
+  React.useEffect(() => {
+    document.documentElement.style.setProperty("--color-fnt", fontColor);
+    document.documentElement.style.setProperty("--color-bg", backgroundColor);
+    document.documentElement.style.setProperty(
+      "--color-acc",
+      fullSeo.color.accent
+    );
+    document.documentElement.style.setProperty(
+      "--color-about",
+      data.strapiAboutpage.seo.color.accent
+    );
+    document.documentElement.style.setProperty(
+      "--color-blog",
+      data.strapiBlogpage.seo.color.accent
+    );
+    document.documentElement.style.setProperty(
+      "--color-book",
+      data.strapiBookpage.seo.color.accent
+    );
+    document.documentElement.style.setProperty(
+      "--color-contact",
+      data.strapiContactpage.seo.color.accent
+    );
+    document.documentElement.style.setProperty(
+      "--color-home",
+      data.strapiHomepage.seo.color.accent
+    );
+    document.documentElement.style.setProperty(
+      "--color-speaking",
+      data.strapiSpeakingpage.seo.color.accent
+    );
+    document.documentElement.style.setProperty(
+      "--color-workshop",
+      data.strapiWorkshoppage.seo.color.accent
+    );
+  }, []);
 
   const getMetaTags = () => {
     const tags = [];
