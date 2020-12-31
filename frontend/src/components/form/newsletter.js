@@ -9,7 +9,7 @@ const Newsletter = () => {
   const onSubmit = (values) => {
     setMessage(`Sending...`);
 
-    fetch(`${process.env.API_URL}/requests-newsletters`, {
+    fetch(`${process.env.GATSBY_API_URL}/requests-newsletters`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(values),
