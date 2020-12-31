@@ -52,6 +52,8 @@
   "scripts": {
     "build": "gatsby build",
     "develop": "gatsby develop",
+    "develop-stg": "NODE_ENV=staging gatsby develop",
+    "develop-prd": "NODE_ENV=production gatsby develop",
     "dev": "npm run develop",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
