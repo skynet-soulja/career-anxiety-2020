@@ -55,6 +55,10 @@ const SEO = ({ seo = {} }) => {
   }, []);
 
   const getMetaTags = () => {
+    console.log(`API_URL -> ${process.env.API_URL}`);
+    console.log(`GATSBY_API_URL -> ${process.env.GATSBY_API_URL}`);
+    console.log(`ROOT_URL -> ${process.env.ROOT_URL}`);
+    console.log(`GATSBY_ROOT_URL -> ${process.env.GATSBY_ROOT_URL}`);
     const tags = [];
 
     if (fullSeo.metaTitle) {
