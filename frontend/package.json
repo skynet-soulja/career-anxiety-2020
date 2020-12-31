@@ -1,7 +1,7 @@
 {
-  "name": "gatsby-starter-default",
+  "name": "frontend",
   "private": true,
-  "description": "Career Anxiety Website",
+  "description": "Career Anxiety 2020 Website - Frontend",
   "version": "0.1.0",
   "author": "William Martin <martinwillnorman@protonmail.com>",
   "dependencies": {

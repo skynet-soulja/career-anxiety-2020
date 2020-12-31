@@ -2,7 +2,7 @@
   "name": "backend",
   "private": true,
   "version": "0.1.0",
-  "description": "Career Anxiety 2020 Website",
+  "description": "Career Anxiety 2020 Website - Backend",
   "scripts": {
     "develop-dev": "NODE_ENV=development strapi develop",
     "develop-stg": "NODE_ENV=staging strapi develop",
