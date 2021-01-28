@@ -6,7 +6,7 @@ Website for Career Anxiety 2020
 
 The steps to get local development up and running
 
-## Running Backend
+### Running Backend
 
 ```
 # Using Yarn
