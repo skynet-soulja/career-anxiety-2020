@@ -1,71 +1,44 @@
-# Strapi Starter Gatsby Blog
+# Career Anxiety 2020
 
-Gatsby starter for creating a blog with Strapi.
-
-![screenshot image](/screenshot.png)
-
-This starter allows you to try Strapi with Gatsby with the example of a simple blog. It is fully customizable and due to the fact that it is open source, fully open to contributions. So do not hesitate to add new features and report bugs!
-
-## Features
-
-- 2 Content types: Article, Category
-- 2 Created articles
-- 3 Created categories
-- Responsive design using UIkit
-- SEO and social media friendly
-
-Pages:
-
-- "/" to display every articles
-- "/article/:id" to display one article
-- "/category/:id" display articles depending on the category
+Website for Career Anxiety 2020
 
 ## Getting started
 
-The easiest way to try this starter is to run it locally on your computer.
+The steps to get local development up and running
 
-First, you'll need to create your own copy of this starter. You can do so by clicking [the "Use this template" button](https://github.com/strapi/strapi-starter-gatsby-blog/generate) on GitHub, and filling the [form](https://docs.github.com/en/github/creating-cloning-and-archiving-repositories/creating-a-repository-from-a-template)
-
-### Backend
-
-Create a Strapi project named `backend` using the [blog template](https://github.com/strapi/strapi-template-blog):
+## Running Backend
 
 ```
 # Using Yarn
-yarn create strapi-app backend --template https://github.com/strapi/strapi-template-blog
+cd backend
+yarn install
 
-# Or using NPM
-npx create-strapi-app backend --template https://github.com/strapi/strapi-template-blog
+# dev env
+yarn develop-dev
+# staging env 
+yarn develop-stg
+# production env
+yarn develop-prd
+depending on env
 ```
-
-The Strapi server will automatically start and import sample seed data.
+Must setup proper environment variables with .env file 
 
 ### Frontend
 
 Leave the Strapi backend running in the background. Open another terminal tab, and make sure you're in the `frontend` directory:
 
-```bash
+```
 cd frontend
-```
-
-Install dependencies and start the Gatsby server:
-
-```bash
-# Using yarn
 yarn install
+
+# dev env
 yarn develop
-
-# Using npm
-npm install
-npm run develop
+# staging env
+yarn develop-stg
+# production env
+yarn develop-prd
 ```
 
-If you want to change the default environment variables, create a `.env` file like this:
+Environment variables are handled through file extensions, so .env.development/.env.staging/.env.production
 
-```sh
-cp .env.example .env
-```
-
-The Gatsby server will run here => [http://localhost:3000](http://localhost:3000)
-
-Enjoy this starter!
+These will need to be setup to point frontend to the correct backend api endpoints
